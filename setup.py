@@ -18,4 +18,4 @@ setup(name='python-btr',
       tests_require=['pytest', 'pytest-coverage'],
       test_suite='tests',
       include_package_data=True,
-      url='', )
+      url='https://github.com/juniorcarvalho/python-btr', )
