@@ -7,3 +7,4 @@ This small utility reads this file by creating a python object model with the js
 to generate the file go to: binance.com -> Orders -> Order History
 
 [![Build Status](https://travis-ci.org/juniorcarvalho/python-btr.svg?branch=master)](https://travis-ci.org/juniorcarvalho/python-btr)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/287c3540f2354ac89a5176259c7539bd)](https://www.codacy.com/app/juniorcarvalho/python-btr?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=juniorcarvalho/python-btr&amp;utm_campaign=Badge_Grade)
