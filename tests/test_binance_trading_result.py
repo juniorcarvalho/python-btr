@@ -1,22 +1,25 @@
 import pytest
 from binance.binance import TradingResult
-
+from datetime import datetime
 
 def test_parameter():
-    with pytest.raises(TypeError) as exec:
+    with pytest.raises(TypeError) as e:
         TradingResult()
-        assert (str(exec.value)) == "__init__() missing 1 required positional argument: 'file_name'"
+        if not (str(e.value)) == "__init__() missing 1 required positional argument: 'file_name'":
+            AssertionError()
 
     with pytest.raises(OSError):
         TradingResult('test.txt')
 
-    with pytest.raises(Exception) as exec:
+    with pytest.raises(Exception) as e:
         TradingResult('tests/OrderHistoryInvalidHeader.xlsx')
-        assert (str(exec.value)) == 'Invalid header'
+        if not (str(e.value)) == 'Invalid header':
+            AssertionError()
 
 
 def test_instance_variables(file_result_trading):
-    assert file_result_trading.file_name
+    if not file_result_trading.file_name:
+        AssertionError()
 
 
 def test_import_results(file_result_trading):
@@ -32,14 +35,7 @@ def test_import_results(file_result_trading):
         '_status': 'Filled',
         '_trading': [
             {
-                '_datetime': 'Date(UTC)',
-                '_filled': 'Trading Price',
-                '_total': 'Filled',
-                '_fee': 'Total',
-                '_fee_coin': 'Fee'
-            },
-            {
-                '_datetime': '2018-11-13 01:58:03',
+                '_datetime': datetime.strptime('2018-11-13 01:58:03','%Y-%m-%d %H:%M:%S'),
                 '_filled': '0.00000126',
                 '_total': '2200',
                 '_fee': '0.00277200',
@@ -48,4 +44,5 @@ def test_import_results(file_result_trading):
         ]
     }
     results = file_result_trading.import_file()
+
     assert results[0].get_json() == data

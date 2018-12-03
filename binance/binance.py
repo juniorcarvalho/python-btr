@@ -2,7 +2,7 @@ import os
 
 import xlrd
 from binance.types import Results, Trading
-
+from datetime import datetime
 
 class TradingResult:
     def __init__(self, file_name):
@@ -52,10 +52,11 @@ class TradingResult:
                                )
             if len(str(line[0].value)) == 0:
                 try:
-                    date_read = line[1].value
+                    date_read = datetime.strptime(line[1].value, "%Y-%m-%d %H:%M:%S")
                 except ValueError:
                     date_read = None
-                if not date_read is None:
+
+                if date_read is not None:
                     trading = Trading(date_read,
                                       line[2].value,
                                       line[3].value,

@@ -1,5 +1,5 @@
 from datetime import datetime
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 import re
 
 class Results(object):
@@ -54,8 +54,8 @@ class Results(object):
         if isinstance(value, str):
             try:
                 value = Decimal(value)
-            except ValueError:
-                raise ValueError
+            except InvalidOperation:
+                raise InvalidOperation
         self._order_price = value
 
     @property
@@ -67,8 +67,8 @@ class Results(object):
         if isinstance(value, str):
             try:
                 value = Decimal(value)
-            except ValueError:
-                raise ValueError
+            except InvalidOperation:
+                raise InvalidOperation
         self._order_amount = value
 
     @property
@@ -80,8 +80,8 @@ class Results(object):
         if isinstance(value, str):
             try:
                 value = Decimal(value)
-            except ValueError:
-                raise ValueError
+            except InvalidOperation:
+                raise InvalidOperation
         self._avg_trading_price = value
 
     @property
@@ -93,8 +93,8 @@ class Results(object):
         if isinstance(value, str):
             try:
                 value = Decimal(value)
-            except ValueError:
-                raise ValueError
+            except InvalidOperation:
+                raise InvalidOperation
         self._filled = value
 
     @property
@@ -106,8 +106,8 @@ class Results(object):
         if isinstance(value, str):
             try:
                 value = Decimal(value)
-            except ValueError:
-                raise ValueError
+            except InvalidOperation:
+                raise InvalidOperation
         self._total = value
 
     @property
@@ -169,8 +169,8 @@ class Trading(object):
         if isinstance(value, str):
             try:
                 value = Decimal(value)
-            except ValueError:
-                raise ValueError
+            except InvalidOperation:
+                raise InvalidOperation
         self._filled = value
 
     @property
@@ -182,8 +182,8 @@ class Trading(object):
         if isinstance(value, str):
             try:
                 value = Decimal(value)
-            except ValueError:
-                raise ValueError
+            except InvalidOperation:
+                raise InvalidOperation
         self._total = value
 
     @property
@@ -195,8 +195,8 @@ class Trading(object):
         if isinstance(value, str):
             try:
                 value = Decimal(value)
-            except ValueError:
-                raise ValueError
+            except InvalidOperation:
+                raise InvalidOperation
         self._fee = value
 
     @property
@@ -222,4 +222,8 @@ def format_fee(text):
         fee_coin = None
     else:
         fee_coin = fee_coin[0]
-    return str(fee), fee_coin
+
+    if fee is not None:
+        fee = str(fee)
+
+    return fee, fee_coin
